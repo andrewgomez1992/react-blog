@@ -9,7 +9,7 @@ const app = express();
 const salt = bcrypt.genSaltSync(10);
 const secret = "qsdu98qw12319812kln";
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(express.json());
 mongoose.connect(
   "mongodb+srv://blog:Spanish8000@cluster0.euzg2jo.mongodb.net/"
@@ -47,7 +47,6 @@ app.post("/login", async (req, res) => {
       res.cookie("token", token);
 
       // Log in successful
-      // Additional login logic can be added here
       res.json({ success: true });
     });
   } else {
