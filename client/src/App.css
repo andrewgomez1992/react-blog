@@ -52,5 +52,15 @@ div.post p.info {
   color: #888;
   font-size: .7rem;
   font-weight: bold;
+  display: flex;
+  gap: 10px;
+}
 
+div.post p.info a.author {
+  color: #333;
+}
+
+div.post p.summary {
+  margin: 10px 0px;
+  line-height: 1.4rem;
 }
