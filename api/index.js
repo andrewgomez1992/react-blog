@@ -49,7 +49,7 @@ app.post("/login", async (req, res) => {
       res.cookie("token", token);
 
       // Log in successful
-      res.json({ success: true });
+      res.json({ success: true, id: userDoc._id, username });
     });
   } else {
     // Wrong credentials
@@ -58,7 +58,16 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/profile", (req, res) => {
-  res.json(req.cookies);
+  const { token } = req.cookies;
+  jwt.verify(token, secret, {}, (err, info) => {
+    if (err) throw err;
+    res.json(info);
+  });
+  res.json(token);
+});
+
+app.post("/logout", (req, res) => {
+  res.cookie("token", "").json("ok");
 });
 
 app.listen(4000, () => {
