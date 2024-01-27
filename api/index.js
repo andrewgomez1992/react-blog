@@ -5,6 +5,7 @@ const User = require("./models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const app = express();
+const cookieParser = require("cookie-parser");
 
 const salt = bcrypt.genSaltSync(10);
 const secret = "qsdu98qw12319812kln";
@@ -14,6 +15,7 @@ app.use(express.json());
 mongoose.connect(
   "mongodb+srv://blog:Spanish8000@cluster0.euzg2jo.mongodb.net/"
 );
+app.use(cookieParser());
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
@@ -53,6 +55,10 @@ app.post("/login", async (req, res) => {
     // Wrong credentials
     res.status(400).json("Wrong credentials");
   }
+});
+
+app.get("/profile", (req, res) => {
+  res.json(req.cookies);
 });
 
 app.listen(4000, () => {
