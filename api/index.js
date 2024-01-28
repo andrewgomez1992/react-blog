@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("./models/User");
+const Post = require("./models/Post");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
@@ -73,14 +74,27 @@ app.post("/logout", (req, res) => {
   res.cookie("token", "").json("ok");
 });
 
-app.post("/post", uploadMiddleware.single("file"), (req, res) => {
+app.post("/post", uploadMiddleware.single("file"), async (req, res) => {
   const { originalname, path } = req.file;
   const parts = originalname.split(".");
   const ext = parts[parts.length - 1];
   const newPath = path + "" + ext;
   fs.renameSync(path, newPath);
 
-  res.json({ ext });
+  const { title, summary, content, coverImage } = req.body;
+  const postDoc = await Post.create({
+    title,
+    summary,
+    content,
+    coverImage: newPath,
+  });
+
+  res.json(postDoc);
+});
+
+app.get("/post", async (req, res) => {
+  const posts = await Post.find();
+  res.json(posts);
 });
 
 app.listen(4000, () => {
