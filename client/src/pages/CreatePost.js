@@ -1,42 +1,14 @@
-import React, { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
+import React, { useState } from "react";
 import axios from "axios";
 import "react-quill/dist/quill.snow.css";
 import { Navigate } from "react-router-dom";
-
-const modules = {
-  toolbar: [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    //   [{ font: [] }],
-    ["bold", "italic", "underline", "strike", "blockquote"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ indent: "-1" }, { indent: "+1" }],
-    ["link", "image"],
-    [({ color: [] }, { background: [] })],
-
-    ["clean"], // remove formatting button
-  ],
-};
-
-const formats = [
-  "header",
-  "bold",
-  "italic",
-  "underline",
-  "strike",
-  "blockquote",
-  "list",
-  "bullet",
-  "indent",
-  "link",
-  "image",
-];
+import Editor from "../components/Editor";
 
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
-  const [files, setFile] = useState("");
+  const [files, setFiles] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   const createNewPost = async (e) => {
@@ -67,24 +39,19 @@ const CreatePost = () => {
       <form onSubmit={createNewPost}>
         <input
           type="title"
-          placeholder="Title"
+          placeholder={"Title"}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <input
           type="summary"
-          placeholder="Summary"
+          placeholder={"Summary"}
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
         />
-        <input type="file" onChange={(e) => setFile(e.target.files)} />
-        <ReactQuill
-          value={content}
-          modules={modules}
-          formats={formats}
-          onChange={(newValue) => setContent(newValue)}
-        />
-        <button style={{ marginTop: "5px" }}>Create New Post</button>
+        <input type="file" onChange={(e) => setFiles(e.target.files)} />
+        <Editor value={content} onChange={setContent} />
+        <button style={{ marginTop: "5px" }}>Create post</button>
       </form>
     </>
   );

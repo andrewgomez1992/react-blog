@@ -5,7 +5,8 @@ a{
   cursor: pointer;
 }
 body{
-  color: #222;
+  color: #a9a9a9;
+  background-color: rgb(37, 37, 37);
 }
 img{
   max-width: 100%;
@@ -90,7 +91,7 @@ button{
   display: block;
   background-color: #555;
   border:0;
-  color: #fff;
+  color: #8d8d8d;
   border-radius: 5px;
   padding: 7px 0;
 }
