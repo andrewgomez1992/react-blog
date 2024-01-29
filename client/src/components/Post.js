@@ -1,23 +1,25 @@
-import React from "react";
-import reactpic from "../assets/react.jpg";
+import React, { useContext } from "react";
+import formatDate from "../helperFunctions/formatDate";
+import { UserContext } from "../UserContext";
 
-const Post = () => {
+const Post = ({ title, summary, coverImage, createdAt }) => {
+  const imageUrl = `http://localhost:4000/api/${coverImage}`;
+  const { userInfo } = useContext(UserContext);
+
+  console.log("user", userInfo);
+
   return (
     <div className="post">
       <div className="image">
-        <img src={reactpic} alt="" />
+        <img src={imageUrl} alt="" />
       </div>
       <div className="texts">
-        <h2>Redux, why?</h2>
+        <h2>{title}</h2>
         <p className="info">
-          <span className="author">Drew Gomez</span>
-          <time>2024-01-23 4:42pm</time>
+          <span className="author">{userInfo.data.username}</span>
+          <time>{formatDate(createdAt)}</time>
         </p>
-        <p className="summary">
-          Let's take a second to dive in and decide why or why not we'd be going
-          with Redux in our next project. We will talk about pros and cons, and
-          also mention some competitors who I've also broken down, links below!
-        </p>
+        <p className="summary">{summary}</p>
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const register = async (e) => {
     e.preventDefault();
@@ -22,10 +24,8 @@ const RegisterPage = () => {
         }
       );
 
-      console.log(response);
-
       if (response.status === 200) {
-        alert("Registration successful");
+        setSuccess(true);
       } else {
         alert("Registration failed");
       }
@@ -35,26 +35,26 @@ const RegisterPage = () => {
     }
   };
 
-  console.log("username ->", username);
-  console.log("password ->", password);
-
   return (
-    <form className="register" onSubmit={register}>
-      <h1>Register</h1>
-      <input
-        type="text"
-        value={username}
-        placeholder="username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        value={password}
-        placeholder="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button>Register</button>
-    </form>
+    <>
+      {success && <Navigate to="/" />}
+      <form className="register" onSubmit={register}>
+        <h1>Register</h1>
+        <input
+          type="text"
+          value={username}
+          placeholder="username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          value={password}
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button>Register</button>
+      </form>
+    </>
   );
 };
 

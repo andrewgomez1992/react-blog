@@ -34,7 +34,7 @@ const Header = () => {
     }
   };
 
-  const username = userInfo?.username;
+  const username = userInfo.data.username;
 
   return (
     <header>
