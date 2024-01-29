@@ -16,7 +16,7 @@ const Post = ({ title, summary, coverImage, createdAt }) => {
       <div className="texts">
         <h2>{title}</h2>
         <p className="info">
-          <span className="author">{userInfo.data.username}</span>
+          <span className="author">{userInfo?.data?.username}</span>
           <time>{formatDate(createdAt)}</time>
         </p>
         <p className="summary">{summary}</p>

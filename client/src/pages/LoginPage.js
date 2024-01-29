@@ -30,10 +30,8 @@ const LoginPage = () => {
       console.log(response);
 
       if (response.status === 200) {
-        // response.json().then((userInfo) => {
         setUserInfo(response.data);
         setRedirect(true);
-        // });
       }
     } catch (error) {
       console.error(error);
@@ -46,22 +44,24 @@ const LoginPage = () => {
   }
 
   return (
-    <form className="login" onSubmit={login}>
-      <h1>Login</h1>
-      <input
-        type="text"
-        value={username}
-        placeholder="username"
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        value={password}
-        placeholder="password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button>Login</button>
-    </form>
+    <>
+      <form className="login" onSubmit={login}>
+        <h1>Login</h1>
+        <input
+          type="text"
+          value={username}
+          placeholder="username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          value={password}
+          placeholder="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button>Login</button>
+      </form>
+    </>
   );
 };
 

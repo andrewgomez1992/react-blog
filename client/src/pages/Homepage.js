@@ -22,16 +22,19 @@ const Homepage = () => {
   return (
     <>
       {posts.length > 0 &&
-        posts.map((post) => (
-          <Post
-            key={post._id}
-            title={post.title}
-            content={post.content}
-            coverImage={post.coverImage}
-            createdAt={post.createdAt}
-            summary={post.summary}
-          />
-        ))}
+        posts
+          .slice()
+          .reverse()
+          .map((post) => (
+            <Post
+              key={post._id}
+              title={post.title}
+              content={post.content}
+              coverImage={post.coverImage}
+              createdAt={post.createdAt}
+              summary={post.summary}
+            />
+          ))}
     </>
   );
 };

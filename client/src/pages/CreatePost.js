@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
+import axios from "axios";
 import "react-quill/dist/quill.snow.css";
 import { Navigate } from "react-router-dom";
 
@@ -39,31 +40,26 @@ const CreatePost = () => {
   const [redirect, setRedirect] = useState(false);
 
   const createNewPost = async (e) => {
-    const data = new FormData();
-    data.set("title", title);
-    data.set("summary", summary);
-    data.set("content", content);
-    data.set("file", files[0]);
     e.preventDefault();
-    console.log("files", files);
 
-    const response = await fetch("http://localhost:4000/post", {
-      method: "POST",
-      body: data,
-      credentials: true,
-    });
-    if (response.ok) {
-      setRedirect(true);
+    const data = new FormData();
+    data.append("title", title);
+    data.append("summary", summary);
+    data.append("content", content);
+    data.append("file", files[0]);
+
+    try {
+      const response = await axios.post("http://localhost:4000/post", data, {
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        setRedirect(true);
+      }
+    } catch (error) {
+      console.error("Error creating post:", error);
     }
   };
-
-  //   useEffect(() => {
-  //     if (redirect) {
-  //       <Navigate to={"/"} />;
-  //     }
-  //   }, [redirect]);
-
-  console.log("redirect", redirect);
 
   return (
     <>

@@ -1,51 +1,49 @@
-import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 
 const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
+
   useEffect(() => {
     axios
       .get("http://localhost:4000/profile", {
         withCredentials: true,
       })
-      .then((res) => {
-        setUserInfo(res);
+      .then((response) => {
+        setUserInfo(response.data);
       })
       .catch((error) => {
         console.error("Error fetching profile:", error);
       });
   }, []);
 
-  const logout = async (e) => {
-    e.preventDefault();
-
-    try {
-      await axios.post("http://localhost:4000/logout", null, {
+  function logout() {
+    axios
+      .post("http://localhost:4000/logout", null, {
         withCredentials: true,
-        method: "POST",
+      })
+      .then(() => {
+        setUserInfo(null);
+      })
+      .catch((error) => {
+        console.error("Error during logout:", error);
       });
+  }
 
-      setUserInfo(null);
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred during logout");
-    }
-  };
-
-  const username = userInfo.data.username;
+  const username = userInfo?.username;
 
   return (
     <header>
       <Link to="/" className="logo">
-        My Blog
+        MyBlog
       </Link>
       <nav>
         {username && (
           <>
-            <Link to="create">Create new post</Link>
-            <a onClick={logout}>Logout</a>
+            <Link to="/create">Create new post</Link>
+            <a onClick={logout}>Logout ({username})</a>
           </>
         )}
         {!username && (
