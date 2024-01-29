@@ -1,22 +1,21 @@
-import React, { useContext } from "react";
+import React from "react";
 import formatDate from "../helperFunctions/formatDate";
-import { UserContext } from "../UserContext";
+import { Link } from "react-router-dom";
 
-const Post = ({ title, summary, coverImage, createdAt }) => {
-  const imageUrl = `http://localhost:4000/api/${coverImage}`;
-  const { userInfo } = useContext(UserContext);
-
-  console.log("user", userInfo);
-
+const Post = ({ id, title, summary, coverImage, createdAt, author }) => {
   return (
     <div className="post">
       <div className="image">
-        <img src={imageUrl} alt="" />
+        <Link to={`/post/${id}`}>
+          <img src={"http://localhost:4000/" + coverImage} alt="Main Pic" />
+        </Link>
       </div>
       <div className="texts">
-        <h2>{title}</h2>
+        <Link to={`/post/${id}`}>
+          <h2>{title}</h2>
+        </Link>
         <p className="info">
-          <span className="author">{userInfo?.data?.username}</span>
+          <span className="author">{author}</span>
           <time>{formatDate(createdAt)}</time>
         </p>
         <p className="summary">{summary}</p>

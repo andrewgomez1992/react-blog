@@ -19,22 +19,22 @@ const Homepage = () => {
     fetchData();
   }, []);
 
+  console.log("posts", posts);
+
   return (
     <>
       {posts.length > 0 &&
-        posts
-          .slice()
-          .reverse()
-          .map((post) => (
-            <Post
-              key={post._id}
-              title={post.title}
-              content={post.content}
-              coverImage={post.coverImage}
-              createdAt={post.createdAt}
-              summary={post.summary}
-            />
-          ))}
+        posts.map((post) => (
+          <Post
+            key={post._id}
+            title={post.title}
+            coverImage={post.coverImage}
+            createdAt={post.createdAt}
+            summary={post.summary}
+            author={post.author.username}
+            id={post._id}
+          />
+        ))}
     </>
   );
 };

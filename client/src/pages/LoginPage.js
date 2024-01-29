@@ -27,8 +27,6 @@ const LoginPage = () => {
         }
       );
 
-      console.log(response);
-
       if (response.status === 200) {
         setUserInfo(response.data);
         setRedirect(true);
