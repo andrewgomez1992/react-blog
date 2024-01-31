@@ -21,11 +21,13 @@ const RegisterPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: true,
         }
       );
 
       if (response.status === 200) {
         setSuccess(true);
+        alert("Registration success! Please login.");
       } else {
         alert("Registration failed");
       }
@@ -37,7 +39,7 @@ const RegisterPage = () => {
 
   return (
     <>
-      {success && <Navigate to="/" />}
+      {success && <Navigate to="/login" />}
       <form className="register" onSubmit={register}>
         <h1>Register</h1>
         <input

@@ -1,23 +1,28 @@
 import { Link } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../UserContext";
 
 const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:4000/profile", {
-        withCredentials: true,
-      })
-      .then((response) => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/profile", {
+          withCredentials: true,
+        });
         setUserInfo(response.data);
-      })
-      .catch((error) => {
-        // console.error("Error fetching profile:", error);
-      });
-  }, []);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserInfo();
+  }, [setUserInfo]);
 
   function logout() {
     axios
@@ -34,19 +39,24 @@ const Header = () => {
 
   const username = userInfo?.username;
 
+  console.log("userInfo", userInfo);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <header className="nav">
       <Link to="/" className="logo">
         MyBlog
       </Link>
       <nav>
-        {username && (
+        {username ? (
           <>
             <Link to="/create">Create new post</Link>
             <a onClick={logout}>Logout ({username})</a>
           </>
-        )}
-        {!username && (
+        ) : (
           <>
             <Link to="/login">Login</Link>
             <Link to="/register">Register</Link>

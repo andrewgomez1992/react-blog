@@ -8,6 +8,7 @@ const EditPost = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
+  const [coverImage, setCoverImage] = useState();
   const [files, setFiles] = useState([]);
   const [redirect, setRedirect] = useState(false);
 
@@ -16,10 +17,10 @@ const EditPost = () => {
       try {
         const response = await axios.get(`http://localhost:4000/post/${id}`);
         const postInfo = response.data;
-
         setTitle(postInfo.title);
         setContent(postInfo.content);
         setSummary(postInfo.summary);
+        setCoverImage(postInfo.coverImage);
       } catch (error) {
         console.error("Error fetching post information:", error.message);
       }
@@ -50,7 +51,7 @@ const EditPost = () => {
 
   return (
     <>
-      {redirect && <Navigate to="/" />}
+      {redirect && <Navigate to={`/post/${id}`} />}
       <form onSubmit={updatePost}>
         <input
           type="title"

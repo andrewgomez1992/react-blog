@@ -19,8 +19,6 @@ const Homepage = () => {
     fetchData();
   }, []);
 
-  console.log("posts", posts);
-
   return (
     <>
       {posts.length > 0 &&

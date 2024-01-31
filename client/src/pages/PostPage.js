@@ -24,9 +24,6 @@ const PostPage = () => {
     fetchData();
   }, [id]);
 
-  console.log("postInfo", postInfo);
-  console.log("id", id);
-
   if (!postInfo) return "";
 
   return (
