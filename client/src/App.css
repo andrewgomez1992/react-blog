@@ -1,3 +1,11 @@
+/* MAIN COLORS THAT NEED TO BE ADDED IN VARS TO USE GLOBALLY (ALSO REFACTORING TO STYLED COMPONENTS) */
+/*
+SKY - #CAEBF2 - possible background for text divs?
+CARBON - #A9A9A9 - text
+WATERMELON - #FF3B3F - accent color
+NEUTRAL - #EFEFEF - Background
+*/
+
 *{
   box-sizing: border-box;
 }
@@ -5,8 +13,8 @@ a{
   cursor: pointer;
 }
 body{
-  color: #a9a9a9;
-  background-color: rgb(37, 37, 37);
+  color: #A9A9A9;
+  background-color: #EFEFEF;
 }
 img{
   max-width: 100%;
@@ -19,7 +27,6 @@ main{
 header{
   display:flex;
   justify-content:space-between;
-  margin-top: 20px;
   margin-bottom: 50px;
   align-items: center;
 }
@@ -154,3 +161,33 @@ div.post-page a.edit-btn{
 a svg{
   height:20px;
 }
+
+.post {
+  display: none;
+}
+
+.logo {
+  position: relative;
+  bottom: 12px;
+  font-family: 'Indie Flower', cursive;
+}
+
+.logo img {
+  width: 50px;
+  position: relative;
+  top: 15px;
+  left: 5px;
+}
+
+.logoandwolf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.navtext {
+  font-weight: bold;
+  font-family: 'Indie Flower', cursive;
+}
+

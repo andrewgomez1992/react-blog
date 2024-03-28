@@ -29,7 +29,7 @@ const Homepage = () => {
             coverImage={post.coverImage}
             createdAt={post.createdAt}
             summary={post.summary}
-            author={post.author.username}
+            author={post.author?.username}
             id={post._id}
           />
         ))}

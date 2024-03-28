@@ -51,7 +51,9 @@ const CreatePost = () => {
         />
         <input type="file" onChange={(e) => setFiles(e.target.files)} />
         <Editor value={content} onChange={setContent} />
-        <button style={{ marginTop: "5px" }}>Create post</button>
+        <button style={{ marginTop: "5px", color: "#F5F5F2" }}>
+          Create post
+        </button>
       </form>
     </>
   );

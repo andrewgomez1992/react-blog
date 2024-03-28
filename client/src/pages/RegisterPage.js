@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import styled from "styled-components";
+
+const Button = styled.button`
+  color: #fff;
+`;
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
@@ -54,7 +59,7 @@ const RegisterPage = () => {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button>Register</button>
+        <Button>Register</Button>
       </form>
     </>
   );

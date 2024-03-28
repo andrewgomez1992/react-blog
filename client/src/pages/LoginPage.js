@@ -1,7 +1,12 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
+import styled from "styled-components";
 import { UserContext } from "../UserContext";
+
+const Button = styled.button`
+  color: #fff;
+`;
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
@@ -57,7 +62,7 @@ const LoginPage = () => {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button>Login</button>
+        <Button>Login</Button>
       </form>
     </>
   );

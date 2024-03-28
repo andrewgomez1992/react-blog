@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { styled } from "styled-components";
 import { UserContext } from "../UserContext";
+import wolflogo from "../assets/wolflogo.png";
+
+const Username = styled.a`
+  color: red;
+`;
 
 const Header = () => {
   const { setUserInfo, userInfo } = useContext(UserContext);
@@ -39,7 +45,7 @@ const Header = () => {
 
   const username = userInfo?.username;
 
-  console.log("userInfo", userInfo);
+  // console.log("userInfo", userInfo);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -47,19 +53,31 @@ const Header = () => {
 
   return (
     <header className="nav">
-      <Link to="/" className="logo">
-        MyBlog
-      </Link>
+      <div className="logoandwolf">
+        <Link to="/" className="logo">
+          The Wolf
+          <img src={wolflogo} alt="wolf" />
+        </Link>
+      </div>
       <nav>
         {username ? (
           <>
-            <Link to="/create">Create new post</Link>
-            <a onClick={logout}>Logout ({username})</a>
+            <Link className="navtext" to="/create">
+              Create new post
+            </Link>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a href="#" className="navtext" onClick={logout}>
+              Logout (<Username>{username}</Username>)
+            </a>
           </>
         ) : (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link className="navtext" to="/login">
+              Login
+            </Link>
+            <Link className="navtext" to="/register">
+              Register
+            </Link>
           </>
         )}
       </nav>

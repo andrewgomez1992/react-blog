@@ -7,7 +7,11 @@ const Post = ({ id, title, summary, coverImage, createdAt, author }) => {
     <div className="post">
       <div className="image">
         <Link to={`/post/${id}`}>
-          <img src={"http://localhost:4000/" + coverImage} alt="Main Pic" />
+          <img
+            className="imagebox"
+            src={"http://localhost:4000/" + coverImage}
+            alt="Main Pic"
+          />
         </Link>
       </div>
       <div className="texts">
