@@ -31,7 +31,7 @@ app.post("/register", async (req, res) => {
     });
     res.json(userDoc);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     res.status(400).json(e);
   }
 });
@@ -56,8 +56,8 @@ app.post("/login", async (req, res) => {
 
 app.get("/profile", (req, res) => {
   const { token } = req.cookies;
-  console.log("token", token);
-  console.log("req", req);
+  // console.log("token", token);
+  // console.log("req", req);
   if (!token) {
     return res.status(401).json({ message: "Token not provided" });
   }
@@ -114,9 +114,9 @@ app.put("/post", uploadMiddleware.single("file"), async (req, res) => {
     const { id, title, summary, content } = req.body;
 
     const postDoc = await Post.findById(id);
-    console.log("postDoc", postDoc);
+    // console.log("postDoc", postDoc);
     const isAuthor = JSON.stringify(postDoc.author) === JSON.stringify(info.id);
-    console.log("isAuthor", isAuthor);
+    // console.log("isAuthor", isAuthor);
     if (!isAuthor) {
       return res.status(400).json("you are not the author");
     }
