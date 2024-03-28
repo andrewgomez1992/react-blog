@@ -7,19 +7,7 @@ The wolf is a blog app built with React and Node.js.
 To get started, follow these simple steps:
 
 ```bash
-git clone this repository
-```
-
-```bash
-cd into client
-npm install
-npm start
-```
-
-```bash
-cd into api
-npm install
-npm start
+coming soon
 ```
 
 
