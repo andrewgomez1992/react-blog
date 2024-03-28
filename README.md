@@ -1,3 +1,5 @@
+WIP -
+
 Blog Website
 Welcome to the Blog Website project! This project consists of a client-side application for the frontend and an API for the backend.
 
